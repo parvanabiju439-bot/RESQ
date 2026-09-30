@@ -1,0 +1,1 @@
+# No pip packages are required. RESQ uses Python standard-library modules only.

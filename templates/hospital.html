@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>RESQ — Hospital</title>
+  <link rel="stylesheet" href="/static/style.css">
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+</head>
+<body data-page="hospital">
+<div class="shell">
+  <header class="topbar">
+    <div class="brand"><div class="logo">R</div><div><h1>RESQ Hospital View</h1><small>Hospital pre-alert and route overview</small></div></div>
+    <nav class="nav"><a href="/">Reporter</a><a href="/control-room">Control Room</a><a href="/responder">Responder</a><a class="active" href="/hospital">Hospital</a></nav>
+  </header>
+
+  <div class="grid-3" style="margin-bottom:18px">
+    <div class="stat"><div id="hospitalCount" class="value">0</div><div class="label">Open hospitals</div></div>
+    <div class="stat"><div class="value">📍</div><div class="label">Pre-alert view</div></div>
+    <div class="stat"><div class="value">🚑</div><div class="label">Route-aware</div></div>
+  </div>
+
+  <div class="grid">
+    <section class="card"><div class="section-title"><h2>Hospital map</h2></div><div id="hospitalMap" class="map"></div></section>
+    <section class="card"><div class="section-title"><h2>Open hospitals</h2></div><div id="hospitalList" class="list"></div></section>
+  </div>
+
+  <section class="card" style="margin-top:18px"><div class="section-title"><h2>Incident pre-alerts</h2><span class="chip info">latest 30</span></div><div id="hospitalIncidents" class="list"></div></section>
+</div>
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script src="/static/app.js"></script>
+</body>
+</html>

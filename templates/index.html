@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>RESQ — Emergency SOS</title>
+  <link rel="stylesheet" href="/static/style.css">
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+</head>
+<body data-page="reporter">
+<div class="shell">
+  <header class="topbar">
+    <div class="brand"><div class="logo">R</div><div><h1>RESQ</h1><small>Emergency Support & Quick-Response Network</small></div></div>
+    <nav class="nav"><a class="active" href="/">Reporter</a><a href="/control-room">Control Room</a><a href="/responder">Responder</a><a href="/hospital">Hospital</a></nav>
+  </header>
+
+  <section class="hero">
+    <h2>One-tap emergency response.</h2>
+    <p>Describe the emergency by typing <strong>or speaking</strong>. RESQ classifies the report, creates a dynamic help radius, finds nearby responders and hospitals, and can trigger an immediate control-station phone call.</p>
+  </section>
+
+  <div class="grid">
+    <section class="card">
+      <div class="section-title"><h2>Emergency report</h2><span class="chip danger">SOS</span></div>
+      <div id="formAlert"></div>
+
+      <div class="grid-3">
+        <div><label for="name">Your name</label><input id="name" placeholder="Optional"></div>
+        <div><label for="phone">Phone number for control callback *</label><input id="phone" type="tel" placeholder="+919876543210"></div>
+        <div><label>Reporter ID</label><div class="item mono small" style="margin-top:0;min-height:43px;display:flex;align-items:center">Loading ID…</div></div>
+      </div>
+
+      <label for="emergencyType">Emergency type</label>
+      <select id="emergencyType">
+        <option value="GENERAL">General emergency</option>
+        <option value="ACCIDENT">Road accident</option>
+        <option value="MEDICAL">Medical emergency</option>
+        <option value="FIRE">Fire</option>
+        <option value="SECURITY">Personal safety</option>
+      </select>
+      <div id="voiceHint" class="small" style="margin-top:6px">For a voice-only report, choose a category so responders have an immediate type even when transcription is unavailable.</div>
+
+      <label for="description">Describe what happened</label>
+      <textarea id="description" placeholder="Example: A person has fallen from a bike and is bleeding."></textarea>
+
+      <label>Voice report</label>
+      <div class="voice-box">
+        <button class="btn ghost" id="recordButton">🎙 Record voice report</button>
+        <span class="small">You can speak instead of typing. Chrome/Edge can also transcribe the speech into the box.</span>
+      </div>
+      <div id="recordStatus" style="margin-top:8px"></div>
+      <div id="voicePreviewWrap" class="item" style="margin-top:8px" hidden><strong>Recorded voice message</strong><audio id="voicePreview" class="audio" controls></audio></div>
+
+      <div style="margin-top:14px" class="row">
+        <button class="btn ghost" id="requestLocation">📍 Use my location</button>
+        <span id="locationStatus" class="small">Demo location loading…</span>
+      </div>
+      <input id="lat" type="hidden"><input id="lon" type="hidden">
+      <div id="callConfig" style="margin-top:9px"></div>
+
+      <div style="margin-top:14px">
+        <button class="btn danger big sos" id="sosButton">🚨 SEND SOS NOW</button>
+        <button class="btn ghost big" style="margin-top:10px" id="lowBandwidthButton">📡 Send essentials (low-bandwidth)</button>
+      </div>
+      <p class="small" style="margin-bottom:0">Low-bandwidth mode sends only SOS + location + emergency type + persistent user ID (plus the phone number needed for the requested control callback).</p>
+    </section>
+
+    <section class="card">
+      <div class="section-title"><h2>How RESQ works</h2><span class="chip info">Prototype</span></div>
+      <div class="list">
+        <div class="item"><strong>🧑‍🚒 Dynamic Help Radius</strong><div class="meta">Starts at 800 m and expands in 800 m steps until enough available responders are found, up to the 5 km demo limit.</div></div>
+        <div class="item"><strong>🤖 AI-style Emergency Classification</strong><div class="meta">Rule-based, transparent keyword classification of your words into category, reported condition and priority. It is not a medical diagnosis.</div></div>
+        <div class="item"><strong>🚑 Smart Route Calculation</strong><div class="meta">Victim → responder and victim → open hospital ETAs are shown. The demo uses simulated traffic; optional OSRM routing can be enabled.</div></div>
+        <div class="item"><strong>📞 Instant Control-Station Callback</strong><div class="meta">When Twilio is configured, RESQ immediately requests an automated phone call to the number entered above after an SOS is created.</div></div>
+      </div>
+    </section>
+  </div>
+
+  <section class="card" id="resultCard" style="margin-top:18px" hidden>
+    <div class="section-title"><h2>SOS response</h2><span class="chip success">Incident created</span></div>
+    <div id="resultContent"></div>
+  </section>
+
+  <div class="footer-note">RESQ is a hackathon prototype. In a real emergency, contact local emergency services. Simulated routes are not turn-by-turn directions.</div>
+</div>
+<script>document.addEventListener('DOMContentLoaded',()=>{const x=document.querySelector('.mono');if(x)x.textContent=localStorage.getItem('resq_user_id')||''});</script>
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script src="/static/app.js"></script>
+</body>
+</html>

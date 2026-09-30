@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>RESQ — Responder</title>
+  <link rel="stylesheet" href="/static/style.css">
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+</head>
+<body data-page="responder">
+<div class="shell">
+  <header class="topbar">
+    <div class="brand"><div class="logo">R</div><div><h1>RESQ Responder</h1><small>Nearby incident response interface</small></div></div>
+    <nav class="nav"><a href="/">Reporter</a><a href="/control-room">Control Room</a><a class="active" href="/responder">Responder</a><a href="/hospital">Hospital</a></nav>
+  </header>
+
+  <section class="card" style="margin-bottom:18px">
+    <div class="section-title"><h2>Responder profile</h2><span id="myStatus"></span></div>
+    <label for="responderSelect">Choose registered demo responder</label>
+    <select id="responderSelect"></select>
+    <p class="small" style="margin-bottom:0">Select an available responder for the hackathon demo. Accepting an incident changes the responder to BUSY until the incident is resolved.</p>
+  </section>
+
+  <section class="card"><div class="section-title"><h2>Nearby emergencies</h2><span class="chip danger">live</span></div><div id="responderIncidents" class="list"></div></section>
+  <div class="footer-note">Accepted incidents move through ON THE WAY → ARRIVED → RESOLVED.</div>
+</div>
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script src="/static/app.js"></script>
+</body>
+</html>

@@ -1,0 +1,34 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>RESQ — Control Room</title>
+  <link rel="stylesheet" href="/static/style.css">
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+</head>
+<body data-page="control">
+<div class="shell">
+  <header class="topbar">
+    <div class="brand"><div class="logo">R</div><div><h1>RESQ Control Room</h1><small>Live incident and dispatch overview</small></div></div>
+    <nav class="nav"><a href="/">Reporter</a><a class="active" href="/control-room">Control Room</a><a href="/responder">Responder</a><a href="/hospital">Hospital</a></nav>
+  </header>
+
+  <div class="grid-3" style="margin-bottom:18px">
+    <div class="stat"><div id="incCount" class="value">0</div><div class="label">Incidents</div></div>
+    <div class="stat"><div id="resCount" class="value">0</div><div class="label">Available responders</div></div>
+    <div class="stat"><div id="hosCount" class="value">0</div><div class="label">Open hospitals</div></div>
+  </div>
+
+  <section class="card" style="margin-bottom:18px"><div class="section-title"><h2>Live map</h2><span class="chip info">refreshes every 5 seconds</span></div><div id="controlMap" class="map"></div></section>
+
+  <div class="grid">
+    <section class="card"><div class="section-title"><h2>Incidents</h2><span class="chip">dispatch</span></div><div id="incidentList" class="list"></div></section>
+    <section class="card"><div class="section-title"><h2>Dispatch activity</h2><span class="chip">notifications</span></div><div id="notificationList" class="list"></div></section>
+  </div>
+
+  <div class="footer-note">Map data uses OpenStreetMap tiles when internet access is available. The radius overlay is the RESQ dynamic help radius.</div>
+</div>
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script src="/static/app.js"></script>
+</body>
+</html>
